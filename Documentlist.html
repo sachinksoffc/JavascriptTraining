@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document List</title>
+    <link href="./Bootstrap.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Label</th>
+          <th>File Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <script>
+          let uploads = [
+            {
+              id: 1,
+              name: "Sales report",
+              filename: "sale.ppt",
+              action: "Edit | Delete",
+            },
+            {
+              id: 2,
+              name: "Quarterly Summary",
+              filename: "summay.ppt",
+              action: "Edit | Delete",
+            },
+            {
+              id: 3,
+              name: "Projection 2013-2014",
+              filename: "projection.pdf",
+              action: "Edit | Delete",
+            },
+          ];
+
+          localStorage.setItem("uploads", JSON.stringify(uploads));
+
+          let uploadsList = JSON.parse(localStorage.getItem("uploads"));
+
+          let htmlContent = "";
+          for (let index = 0; index < uploadsList.length; index++) {
+            htmlContent += "<tr>";
+            htmlContent += "<td>" + uploadsList[index].name + "</td>";
+            htmlContent += "<td>" + uploadsList[index].filename + "</td>";
+            htmlContent += "<td>" + uploadsList[index].action + "</td>";
+            htmlContent += "</tr>";
+          }
+          document.write(htmlContent);
+          
+        </script>
+      </tbody>
+    </table>
+  </body>
+</html>

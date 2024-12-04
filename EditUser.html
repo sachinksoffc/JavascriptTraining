@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>Edit User Information</h1>
+
+    <form action="./UserList.html" method="get">
+      Fullname
+      <input type="text" name="fullname" value="" id="fullname" /> Email
+      <input type="email" name="email" value="" id="email" />
+      <input type="submit" value="Save" onclick="save()" />
+    </form>
+
+    <script>
+      let url = window.location.href;
+      console.log(window.location);
+      let idArray = url.split("?");
+      let id = idArray[1].split("=");
+      id = +id[1];
+      //document.write(id);
+
+      let users = localStorage.getItem("users")
+        ? JSON.parse(localStorage.getItem("users"))
+        : [];
+
+      let userIndex = users.findIndex((user) => user.id === id);
+
+      console.log(users[userIndex].fullname);
+      console.log(users[userIndex].email);
+
+      document.getElementById("fullname").value = users[userIndex].fullname;
+      document.getElementById("email").value = users[userIndex].email;
+
+      function save() {
+        event.preventDefault();
+        let updatedFullName = document.getElementById("fullname").value;
+        let updatedEmail = document.getElementById("email").value;
+        users[userIndex].fullname = updatedFullName;
+        users[userIndex].email = updatedEmail;
+        localStorage.setItem("users", JSON.stringify(users));
+        window.location.href = "./UserList.html";
+      }
+    </script>
+  </body>
+</html>

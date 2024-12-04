@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./Bootstrap.css" rel="stylesheet">
+    <script>
+        function validate() {
+            let fullname = document.getElementById("fullname").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            debugger
+            if (fullname == "") {
+                alert("Please enter fullname");
+                return false;
+            }
+            else if (email == "") {
+                alert("Please enter email");
+                return false;
+            }
+
+            else if (password == "") {
+                alert("Please enter password");
+                return false;
+            }
+
+            else if (confirmPassword == "") {
+                alert("Please enter confirm password");
+                return false;
+            }
+
+            if(confirmPassword != password)
+            {
+                alert("Password and confirm password should be same");
+                return false;   
+            }
+
+            let user = {
+                id: Number(new Date()),
+                fullname: fullname,
+                email: email,
+                password: password
+            };
+            let users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [];
+            users.push(user);
+            localStorage.setItem("users", JSON.stringify(users));
+            return true;
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>Register Page</h1>
+        <div class="row">
+            <div class="col-xxl-6"> 
+                <form action="./RegisterSuccess.html" method="get" novalidate onsubmit="return validate()">
+                    Fullname <input class="form-control" type="text" name="fullname" id="fullname">
+                    Email <input class="form-control" type="email" name="email" id="email">
+                    Password <input class="form-control" type="password" name="password" id="password">
+                    Confirm Password <input class="form-control" type="password" name="confirmPassword"
+                        id="confirmPassword">
+                    <button type="submit" class="btn btn-primary mt-2">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
